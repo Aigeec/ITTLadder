@@ -1,0 +1,6 @@
+{
+    "require": {
+        "slywalker/boost_cake": "*",
+        "twitter/bootstrap": "v3.0.2"
+    }
+}
