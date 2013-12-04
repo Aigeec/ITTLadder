@@ -1,6 +1,9 @@
 {
     "require": {
-        "slywalker/boost_cake": "*",
-        "twitter/bootstrap": "v3.0.2"
+        "slywalker/boost_cake": "*",        
+        "opauth/opauth": "0.4.4",
+        "opauth/facebook": "0.2.1",
+        "opauth/google": "0.2.2",
+        "opauth/twitter": "0.3.1"
     }
 }

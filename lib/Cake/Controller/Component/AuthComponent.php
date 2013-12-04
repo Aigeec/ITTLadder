@@ -371,7 +371,7 @@ class AuthComponent extends Component {
  *
  * @return boolean
  */
-	protected function _setDefaults() {
+	protected function _setDefaults() {        
 		$defaults = array(
 			'logoutRedirect' => $this->loginAction,
 			'authError' => __d('cake', 'You are not authorized to access that location.')
@@ -541,8 +541,7 @@ class AuthComponent extends Component {
  * @link http://book.cakephp.org/2.0/en/core-libraries/components/authentication.html#identifying-users-and-logging-them-in
  */
 	public function login($user = null) {
-		$this->_setDefaults();
-
+		$this->_setDefaults();        
 		if (empty($user)) {
 			$user = $this->identify($this->request, $this->response);
 		}

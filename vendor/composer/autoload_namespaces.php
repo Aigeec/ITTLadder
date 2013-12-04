@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src'),
+    '' => array($vendorDir . '/opauth/facebook', $vendorDir . '/opauth/google', $vendorDir . '/opauth/twitter'),
 );

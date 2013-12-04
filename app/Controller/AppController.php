@@ -31,12 +31,41 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
-
+class AppController extends Controller {    
     public $helpers = array(
 		'Session',
 		'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
 		'Form' => array('className' => 'BoostCake.BoostCakeForm'),
 		'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
 	);
+
+    public $components = array(
+        'Session',
+        'Auth' => array(
+            'loginAction' => array('controller' => 'users', 'action' => 'login', 'admin' => false),
+            'loginRedirect' => array('controller' => 'players', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'players', 'action' => 'index'),
+            'authorize' => 'Controller'
+        ),
+        'Security'        
+    );
+
+    public function isAuthorized($user = null) {
+        // Any registered user can access public functions
+        if (empty($this->request->params['admin'])) {
+            return true;
+        }
+
+        // Only admins can access admin functions
+        if (isset($this->request->params['admin'])) {
+            return (bool)($user['role'] === 'admin');
+        }
+
+        // Default deny
+        return false;
+    }
+
+    public function beforeFilter() {
+        $this->Auth->allow('index', 'view', 'display', 'callback', 'opauth_complete', 'logout');             
+    }
 }

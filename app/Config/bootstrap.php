@@ -109,3 +109,11 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+CakePlugin::load('Opauth', array('routes' => true, 'bootstrap' => true));
+
+// Using Facebook strategy as an example
+Configure::write('Opauth.Strategy.Google', array(
+   'client_id' => '350364158645-7o5jj9fjiice125k06k5ollccah6p5g3.apps.googleusercontent.com',
+   'client_secret' => 'WIo21Mff6gxxSLJYvEMKvvmg'
+));

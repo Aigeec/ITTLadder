@@ -17,6 +17,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
     $title='Inchicore Table Tennis Club Ladder';
+    if(!isset($cols)){ $cols = 6; }
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,23 +29,19 @@
 	<title>
 		<?php echo $title; ?>:<?php echo $title_for_layout; ?>
 	</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<?php
 		echo $this->Html->meta('icon');
 
 		//echo $this->Html->css('cake.generic');
         echo $this->Html->css('bootstrap.min');
         echo $this->Html->css('bootstrap-theme.min');
+        echo $this->Html->css('ittladder');
 
 		//echo $this->fetch('meta');
 		//echo $this->fetch('css');
 		//echo $this->fetch('script');        
-	?>
-    <style>
-		body {
-			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */			
-            font-size: 2.5em;
-		}		
-	</style>
+	?>    
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -59,9 +56,16 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Ladder</a></li>
-					<li><a href="/rules">Rules</a></li>
+					<li class="<?php echo $this->request->here == Router::url(array('controller' => 'players', 'action' => 'index', 'admin' => false)) ? 'active' : ''; ?>">
+                        <?php echo $this->Html->link('Ladder',array('controller' => 'players', 'action' => 'index', 'admin' => false));?>
+                    </li>
+					<li class="<?php echo $this->request->here == Router::url(array('controller' => 'rules', 'action' => 'index', 'admin' => false)) ? 'active' : ''; ?>">
+                        <?php echo $this->Html->link('Rules',array('controller' => 'rules', 'action' => 'index', 'admin' => false));?>
+                    </li>
 					<li><a href="https://www.facebook.com/inchicoreTTC">Us on Facebook</a></li>
+                    <li class="pull-right <?php echo $this->params['prefix'] == 'admin' || $this->request->here == Router::url(array('controller' => 'admin', 'action' => 'index', 'admin' => false)) ? 'active' : ''; ?>">
+                        <?php echo $this->Html->link('Admin',array('controller' => 'admin', 'action' => 'index', 'admin' => false));?>
+                    </li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -71,21 +75,19 @@
 		    <h1><?php echo $title; ?></h1>
 		</div>
         <div class="row-fluid">		    
-            <div class="col-xs-0 col-md-3">
+            <div class="col-xs-0 col-md-<?php echo ((12-$cols)/2); ?>">
 				<!--left-->
 			</div>            
-            <div id="content" class="col-xs-12 col-md-6">		    
+            <div id="content" class="col-xs-12 col-md-<?php echo $cols; ?>">
 			    <?php echo $this->Session->flash(); ?>
 			    <?php echo $this->fetch('content'); ?>
 		    </div>
-            		<div class="col-xs-0 col-md-3">
+            <div class="col-xs-0 col-md-<?php echo ((12-$cols)/2); ?>">
 				<!--right-->
 			</div>
         </div>
 		<div id="footer">			
 		</div>     
-	</div>
-    <?php echo $this->Html->script('bootstrap.min'); ?>
-	<?php echo $this->element('sql_dump'); ?>    
+	</div>    
 </body>
 </html>

@@ -26,11 +26,19 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/', array('controller' => 'players', 'action' => 'index'));
+    Router::connect('/ladder', array('controller' => 'players', 'action' => 'index'));
+    Router::connect('/rules', array('controller' => 'pages', 'action' => 'display', 'rules'));
+
+    Router::connect(
+        '/opauth-complete/*', 
+        array('controller' => 'users', 'action' => 'opauth_complete')
+    );    
+
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
